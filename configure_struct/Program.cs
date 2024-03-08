@@ -1,5 +1,7 @@
 ﻿
 
+using System.Diagnostics;
+
 Console.WriteLine("Wilkommen beim Projektordern Konfigurator!");
 Thread.Sleep(2000);
 
@@ -82,6 +84,21 @@ try
     {
         Console.WriteLine("Der Ordner '" + newFolderPath + "' existiert bereits.");
     }
+
+    // Passe den Pfad zum zu öffnenden Ordner entsprechend an
+    string folderPath = @"C:\Users\smartin\Desktop\Projekte";
+
+    // Überprüfe, ob der Ordner existiert, bevor er geöffnet wird
+    if (System.IO.Directory.Exists(folderPath))
+    {
+        // Öffne den Ordner im Datei-Explorer
+        Process.Start("explorer.exe", folderPath);
+    }
+    else
+    {
+        Console.WriteLine("Der angegebene Ordner existiert nicht.");
+    }
+
 }
 catch (Exception ex)
 {
