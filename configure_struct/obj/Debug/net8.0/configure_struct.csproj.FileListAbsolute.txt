@@ -12,3 +12,4 @@ C:\Users\smartin\Desktop\Entwicklung\configure_struct\configure_struct\obj\Debug
 C:\Users\smartin\Desktop\Entwicklung\configure_struct\configure_struct\obj\Debug\net8.0\configure_struct.pdb
 C:\Users\smartin\Desktop\Entwicklung\configure_struct\configure_struct\obj\Debug\net8.0\configure_struct.genruntimeconfig.cache
 C:\Users\smartin\Desktop\Entwicklung\configure_struct\configure_struct\obj\Debug\net8.0\ref\configure_struct.dll
+C:\Users\smartin\Desktop\Entwicklung\configure_struct\configure_struct\obj\Debug\net8.0\configure_struct.sourcelink.json

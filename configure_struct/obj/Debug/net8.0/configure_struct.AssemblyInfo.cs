@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("configure_struct")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+410c2c00c2ea34f326fada7d4a39eafd261e174a")]
 [assembly: System.Reflection.AssemblyProductAttribute("configure_struct")]
 [assembly: System.Reflection.AssemblyTitleAttribute("configure_struct")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

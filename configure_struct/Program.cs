@@ -86,13 +86,13 @@ try
     }
 
     // Passe den Pfad zum zu öffnenden Ordner entsprechend an
-    string folderPath = @"C:\Users\smartin\Desktop\Projekte";
+   
 
     // Überprüfe, ob der Ordner existiert, bevor er geöffnet wird
-    if (System.IO.Directory.Exists(folderPath))
+    if (System.IO.Directory.Exists(parentDirectoryPath))
     {
         // Öffne den Ordner im Datei-Explorer
-        Process.Start("explorer.exe", folderPath);
+        Process.Start("explorer.exe", parentDirectoryPath);
     }
     else
     {
