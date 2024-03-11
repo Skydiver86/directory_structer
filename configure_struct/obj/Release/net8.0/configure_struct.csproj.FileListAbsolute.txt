@@ -1,0 +1,15 @@
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\bin\Release\net8.0\configure_struct.exe
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\bin\Release\net8.0\configure_struct.deps.json
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\bin\Release\net8.0\configure_struct.runtimeconfig.json
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\bin\Release\net8.0\configure_struct.dll
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\bin\Release\net8.0\configure_struct.pdb
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.AssemblyInfoInputs.cache
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.AssemblyInfo.cs
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.csproj.CoreCompileInputs.cache
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.sourcelink.json
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.dll
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\refint\configure_struct.dll
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.pdb
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\configure_struct.genruntimeconfig.cache
+C:\Users\smartin\Desktop\Entwicklung\directory_structer\configure_struct\obj\Release\net8.0\ref\configure_struct.dll

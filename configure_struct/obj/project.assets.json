@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\smartin\\Desktop\\Entwicklung\\configure_struct\\configure_struct\\configure_struct.csproj",
+      "projectUniqueName": "C:\\Users\\smartin\\Desktop\\Entwicklung\\directory_structer\\configure_struct\\configure_struct.csproj",
       "projectName": "configure_struct",
-      "projectPath": "C:\\Users\\smartin\\Desktop\\Entwicklung\\configure_struct\\configure_struct\\configure_struct.csproj",
+      "projectPath": "C:\\Users\\smartin\\Desktop\\Entwicklung\\directory_structer\\configure_struct\\configure_struct.csproj",
       "packagesPath": "C:\\Users\\smartin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\smartin\\Desktop\\Entwicklung\\configure_struct\\configure_struct\\obj\\",
+      "outputPath": "C:\\Users\\smartin\\Desktop\\Entwicklung\\directory_structer\\configure_struct\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\smartin\\AppData\\Roaming\\NuGet\\NuGet.Config",

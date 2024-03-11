@@ -2,7 +2,7 @@
 
 using System.Diagnostics;
 
-Console.WriteLine("Wilkommen beim Projektordern Konfigurator!");
+Console.WriteLine("Wilkommen beim Projektordner Konfigurator!");
 Thread.Sleep(2000);
 
 
@@ -64,7 +64,7 @@ try
         Console.WriteLine("Ordner erfolgreich erstellt: " + newFolderPath);
 
         // Erstellen Sie die Unterordner
-        string[] subFolders = { "SPS", "EPLAN", "SEW" };
+        string[] subFolders = { "SPS", "EPLAN", "SEW" , "EXCEL" };
         foreach (string subFolderName in subFolders)
         {
             string subFolderPath = Path.Combine(newFolderPath, subFolderName);
