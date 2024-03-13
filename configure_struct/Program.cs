@@ -1,14 +1,75 @@
 ﻿
 
 using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
-Console.WriteLine("Wilkommen beim Projektordner Konfigurator!");
+Console.WriteLine("Wilkommen beim Projektordner Konfigurator!\n");
 Thread.Sleep(2000);
 
 
 string parentDirectoryPath = @"C:\Users\smartin\Desktop\Projekte";
 string selectedFolder = "";
 
+
+    string folderPath = @"C:\Users\smartin\Desktop\Projekte\test"; // Passe den Pfad entsprechend an
+
+    // Zeige den Inhalt des Ordners an
+    FilterFolderContent(folderPath);
+
+    Console.WriteLine("Drücke eine beliebige Taste, um fortzufahren...");
+    Console.ReadKey();
+
+
+static void FilterFolderContent(string folderPath)
+{
+    try
+    {
+        // Zeige Dateien im Ordner an
+        Console.WriteLine("Dateien:");
+        foreach (string file in Directory.GetFiles(folderPath))
+        {
+            int matchCount = GetMatchingCharCount(Path.GetFileName(file));
+            Console.WriteLine($"{Path.GetFileName(file)} - Übereinstimmungen: {matchCount}");
+        }
+
+        // Zeige Unterordner an
+        Console.WriteLine("\nUnterordner:");
+        foreach (string subfolder in Directory.GetDirectories(folderPath))
+        {
+            int matchCount = GetMatchingCharCount(Path.GetFileName(subfolder));
+            Console.WriteLine($"{Path.GetFileName(subfolder)} - Übereinstimmungen: {matchCount}");
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"Fehler beim Filtern des Ordnerinhalts: {e.Message}");
+    }
+}
+
+static int GetMatchingCharCount(string input)
+{
+    // Anzahl der übereinstimmenden Zeichen
+    int matchCount = 0;
+
+    // Vergleichszeichenfolge
+    string targetString = "1149"; // Passe die Vergleichszeichenfolge entsprechend an
+
+    // Überprüfe, ob mindestens drei Zeichen übereinstimmen
+    foreach (char c in targetString)
+    {
+        if (input.Contains(c))
+        {
+            matchCount++;
+        }
+    }
+
+    return matchCount;
+}
+/*
 try
 {
     // Überprüfen, ob die Elternordner existieren
@@ -46,7 +107,7 @@ try
     }
     else
     {
-        Console.WriteLine("Das Elternverzeichnis existiert nicht: " + parentDirectoryPath);
+        Console.WriteLine("Das Verzeichnis existiert nicht: " + parentDirectoryPath);
         return;
     }
 
@@ -64,7 +125,7 @@ try
         Console.WriteLine("Ordner erfolgreich erstellt: " + newFolderPath);
 
         // Erstellen Sie die Unterordner
-        string[] subFolders = { "SPS", "EPLAN", "SEW" , "EXCEL" };
+        string[] subFolders = { "SPS", "EPLAN", "SEW" , "EXCEL" , "Dokumente" };
         foreach (string subFolderName in subFolders)
         {
             string subFolderPath = Path.Combine(newFolderPath, subFolderName);
@@ -103,4 +164,4 @@ try
 catch (Exception ex)
 {
     Console.WriteLine("Fehler beim Erstellen des Ordners: " + ex.Message);
-}
+}*/
