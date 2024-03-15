@@ -1,74 +1,200 @@
 ﻿
 
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text;
 
-Console.WriteLine("Wilkommen beim Projektordner Konfigurator!\n");
-Thread.Sleep(2000);
-
-
-string parentDirectoryPath = @"C:\Users\smartin\Desktop\Projekte";
-string selectedFolder = "";
-
-
-    string folderPath = @"C:\Users\smartin\Desktop\Projekte\test"; // Passe den Pfad entsprechend an
-
-    // Zeige den Inhalt des Ordners an
-    FilterFolderContent(folderPath);
-
-    Console.WriteLine("Drücke eine beliebige Taste, um fortzufahren...");
-    Console.ReadKey();
-
-
-static void FilterFolderContent(string folderPath)
+class Program
 {
-    try
+    static void Main(string[] args)
     {
-        // Zeige Dateien im Ordner an
-        Console.WriteLine("Dateien:");
-        foreach (string file in Directory.GetFiles(folderPath))
-        {
-            int matchCount = GetMatchingCharCount(Path.GetFileName(file));
-            Console.WriteLine($"{Path.GetFileName(file)} - Übereinstimmungen: {matchCount}");
-        }
+        Console.WriteLine("Welcome to the Project Folder Configurator!\n");
 
-        // Zeige Unterordner an
-        Console.WriteLine("\nUnterordner:");
-        foreach (string subfolder in Directory.GetDirectories(folderPath))
+        // Waiting for 2 seconds
+        System.Threading.Thread.Sleep(2000);
+
+        string folderPath = @"W:\SPS\PROG"; // Modify the path accordingly
+
+        // Definieren der Liste von Zahlenbereichen
+        List<Tuple<int, int>> numberRanges = new List<Tuple<int, int>>()
         {
-            int matchCount = GetMatchingCharCount(Path.GetFileName(subfolder));
-            Console.WriteLine($"{Path.GetFileName(subfolder)} - Übereinstimmungen: {matchCount}");
+            Tuple.Create(250, 499),
+            Tuple.Create(500, 749),
+            Tuple.Create(750, 999),
+            Tuple.Create(1000, 1249),
+            Tuple.Create(100000, 100499),
+            Tuple.Create(100500, 100999),
+            Tuple.Create(101000, 101499),
+            Tuple.Create(101500, 101999),
+            Tuple.Create(102000, 102499),
+            Tuple.Create(102500, 102999),
+            Tuple.Create(103000, 103499),
+            Tuple.Create(103500, 103999),
+            Tuple.Create(104000, 104499),
+            Tuple.Create(104500, 104999),
+            Tuple.Create(105000, 105499),
+            Tuple.Create(105500, 105999),
+            Tuple.Create(106000, 106499),
+            Tuple.Create(108000, 108499),
+            Tuple.Create(110000, 110499),
+            Tuple.Create(110500, 110999),
+            Tuple.Create(111000, 111499),
+            Tuple.Create(111500, 111999),
+            Tuple.Create(112000, 112499),
+            Tuple.Create(112500, 112999),
+            Tuple.Create(113000, 113499),
+            Tuple.Create(113500, 113999),
+            Tuple.Create(114000, 114499),
+            Tuple.Create(114500, 114999),
+            Tuple.Create(1250, 1499),
+            Tuple.Create(1500, 1749),
+            Tuple.Create(1750, 1999),
+            Tuple.Create(2000, 2499),
+            Tuple.Create(2500, 2749),
+            Tuple.Create(2750, 2999),
+            Tuple.Create(3000, 3249),
+            Tuple.Create(3250, 3499),
+            Tuple.Create(3500, 3749),
+            Tuple.Create(3750, 3999),
+            Tuple.Create(4000, 4249),
+            Tuple.Create(4250, 4499),
+            Tuple.Create(4500, 4749),
+            Tuple.Create(4750, 4799),
+            Tuple.Create(4800, 4849),
+            Tuple.Create(4850, 4999),
+            Tuple.Create(5000, 5249),
+            Tuple.Create(5250, 5299),
+            Tuple.Create(5300, 5399),
+            Tuple.Create(5400, 5499),
+            Tuple.Create(5500, 5749),
+            Tuple.Create(5750, 5999),
+            Tuple.Create(6000, 6249),
+            Tuple.Create(6250, 6299),
+            Tuple.Create(6300, 6499),
+            Tuple.Create(6500, 6599),
+            Tuple.Create(6600, 6699),
+            Tuple.Create(6700, 6799),
+            Tuple.Create(6800, 6899),
+            Tuple.Create(6900, 6999),
+            Tuple.Create(7000, 7249),
+            Tuple.Create(7250, 7999),
+            Tuple.Create(8000, 8249),
+            Tuple.Create(8250, 8499),
+            Tuple.Create(8500, 8749),
+            Tuple.Create(8750, 8999),
+            Tuple.Create(9000, 9249),
+            Tuple.Create(9250, 9499)
+        };
+
+        Console.WriteLine("Enter a project number:");
+        int projectNumber = int.Parse(Console.ReadLine());
+
+        // Durchsuchen der Zahlenbereiche, um festzustellen, in welchem Bereich die Projektnummer liegt
+        foreach (var range in numberRanges)
+        {
+            if (projectNumber >= range.Item1 && projectNumber <= range.Item2)
+            {
+                Console.WriteLine($"Project number {projectNumber} is in the range {range.Item1}-{range.Item2}");
+                string openPath = $"{range.Item1}-{range.Item2}";
+                string endPath = Path.Combine(folderPath, openPath);
+                Console.WriteLine(endPath);
+
+                string searchValue = projectNumber.ToString() ;
+                string absolutePath = FindFolderByMatch(endPath, searchValue);
+                string spsPath = Path.Combine(absolutePath, "PROG");
+
+
+                if (!string.IsNullOrEmpty(absolutePath))
+                {
+                    Console.WriteLine($"Found folder with match '{searchValue}' at: {absolutePath}");
+
+                    Console.WriteLine(spsPath);
+                   
+                }
+                else
+                {
+                    Console.WriteLine($"Folder with match '{searchValue}' not found in '{endPath}'.");
+                }
+
+                static string FindFolderByMatch(string parentFolderPath, string searchTerm)
+                {
+                    try
+                    {
+                        // Suche nach Unterordnern im übergeordneten Ordner
+                        string[] subfolders = Directory.GetDirectories(parentFolderPath);
+
+                        // Durchlaufe alle Unterordner und überprüfe, ob einer von ihnen den Suchbegriff im Namen enthält
+                        foreach (string subfolder in subfolders)
+                        {
+                            string folderName = Path.GetFileName(subfolder);
+                            if (folderName.Contains(searchTerm))
+                            {
+                                return subfolder; // Rückgabe des gefundenen Ordnerpfads
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error searching for folder: {ex.Message}");
+                    }
+
+                    return null; // Rückgabe null, wenn kein Ordner mit der angegebenen Übereinstimmung gefunden wurde
+                }
+
+
+            }
+        }   
+
+
+
+        Console.WriteLine("\nPress any key to continue...");
+        Console.ReadKey();
+    }
+
+    static void FilterFolderContent(string folderPath, string projectNumber)
+    {
+        try
+        {
+            // Display files in the folder
+            Console.WriteLine("\nFiles:");
+            foreach (string file in Directory.GetFiles(folderPath))
+            {
+                int matchCount = GetMatchingCharCount(Path.GetFileName(file), projectNumber);
+                Console.WriteLine($"{Path.GetFileName(file)} - Matches: {matchCount}");
+            }
+
+            // Display subfolders
+            Console.WriteLine("\nSubfolders:");
+            foreach (string subfolder in Directory.GetDirectories(folderPath))
+            {
+                int matchCount = GetMatchingCharCount(Path.GetFileName(subfolder), projectNumber);
+                Console.WriteLine($"{Path.GetFileName(subfolder)}");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error filtering folder content: {e.Message}");
         }
     }
-    catch (Exception e)
+
+    static int GetMatchingCharCount(string input, string targetString)
     {
-        Console.WriteLine($"Fehler beim Filtern des Ordnerinhalts: {e.Message}");
+        // Number of matching characters
+        int matchCount = 0;
+
+        // Check if at least three characters match
+        foreach (char c in targetString)
+        {
+            if (input.Contains(c))
+            {
+                matchCount++;
+            }
+        }
+
+        return matchCount;
     }
 }
 
-static int GetMatchingCharCount(string input)
-{
-    // Anzahl der übereinstimmenden Zeichen
-    int matchCount = 0;
-
-    // Vergleichszeichenfolge
-    string targetString = "1149"; // Passe die Vergleichszeichenfolge entsprechend an
-
-    // Überprüfe, ob mindestens drei Zeichen übereinstimmen
-    foreach (char c in targetString)
-    {
-        if (input.Contains(c))
-        {
-            matchCount++;
-        }
-    }
-
-    return matchCount;
-}
 /*
 try
 {
