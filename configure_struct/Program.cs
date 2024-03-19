@@ -89,7 +89,7 @@ class Program
             Tuple.Create(9250, 9499)
         };
 
-        Console.WriteLine("Enter a project number:");
+        Console.WriteLine("Welche Projektnummer soll gesucht werden:");
         int projectNumber = int.Parse(Console.ReadLine());
 
         // Durchsuchen der Zahlenbereiche, um festzustellen, in welchem Bereich die Projektnummer liegt
@@ -238,7 +238,7 @@ class Program
                                         if (Directory.Exists(directory113Path) || Directory.Exists(directory114Path))
                                         {
                                             // Fragen Sie den Benutzer nach dem zu erstellenden Ordner
-                                            Console.WriteLine("In which directory you will save the new? (113 or 114)");
+                                            Console.WriteLine("In welches Verzeichniss soll der neue Ordner erstellt werden (113 oder 114)");
                                             string userInput = Console.ReadLine();
 
                                             // Überprüfen, ob der Benutzer eine gültige Eingabe gemacht hat
@@ -263,10 +263,9 @@ class Program
                                     {
                                         Console.WriteLine("Das Verzeichnis existiert nicht: " + parentDirectoryPath);
                                     }
-
-                                    Console.WriteLine("Enter the name of the new Directory");
+                                    Console.WriteLine("Name des neuen Verzeichniss:");
                                     string projektnummer = Console.ReadLine();
-                                    Console.WriteLine("Operation still starting...\n");
+                                    Console.WriteLine("Operation wird gestartet...\n");
 
                                     // Vollständigen Pfad des neuen Ordners erstellen
                                     string newFolderPath = Path.Combine(parentDirectoryPath, selectedFolder, projektnummer);
@@ -276,7 +275,7 @@ class Program
                                     {
                                         // Versuchen, den Ordner zu erstellen
                                         Directory.CreateDirectory(newFolderPath);
-                                        Console.WriteLine("Directory succesfully created: " + newFolderPath);
+                                        Console.WriteLine("Verzeichniss erfolgreiich erstellt: " + newFolderPath);
 
                                         // Erstellen Sie die Unterordner
                                         string[] subFolders = { "SPS", "EPLAN", "SEW", "EXCEL", "Dokumente" };
@@ -290,21 +289,18 @@ class Program
                                             {
                                                 string altFolderPath = Path.Combine(subFolderPath, "ALT");
                                                 Directory.CreateDirectory(altFolderPath);
-                                              //  Console.WriteLine($"Unterordner 'ALT' erfolgreich erstellt: {altFolderPath}");
                                             }
                                         }
                                     }
                                     else
                                     {
                                         Console.WriteLine("Der Ordner '" + newFolderPath + "' existiert bereits.");
-                                    }                                  
-
+                                    }                                
                                     // Überprüfe, ob der Ordner existiert, bevor er geöffnet wird
                                     if (System.IO.Directory.Exists(parentDirectoryPath))
                                     {
                                         // Öffne den Ordner im Datei-Explorer
                                         Process.Start("explorer.exe", parentDirectoryPath);
-
                                     }
                                     else
                                     {
@@ -316,10 +312,7 @@ class Program
                                 {
                                     Console.WriteLine("Fehler beim Erstellen des Ordners: " + ex.Message);
                                 }
-
-
                                 return subfolder; // Rückgabe des gefundenen Ordnerpfads
-
                             }
                         }
                     }
@@ -327,11 +320,8 @@ class Program
                     {
                         Console.WriteLine($"Error searching for folder: {ex.Message}");
                     }
-
                     return null; // Rückgabe null, wenn kein Ordner mit der angegebenen Übereinstimmung gefunden wurde
                 }
-
-
             }
         }   
         Console.WriteLine("\nPress any key to continue...");
