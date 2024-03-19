@@ -3,12 +3,14 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 
 class Program
 {
     static void Main(string[] args)
     {
+
         Console.WriteLine("Welcome to the Project Folder Configurator!\n");
 
         // Waiting for 2 seconds
@@ -102,7 +104,10 @@ class Program
 
                 string searchValue = projectNumber.ToString() ;
                 string absolutePath = FindFolderByMatch(endPath, searchValue);
-                string spsPath = Path.Combine(absolutePath, "PROG");
+                string spsPath = Path.Combine(absolutePath);
+
+                Console.WriteLine(spsPath);
+               
 
 
                 if (!string.IsNullOrEmpty(absolutePath))
@@ -110,11 +115,100 @@ class Program
                     Console.WriteLine($"Found folder with match '{searchValue}' at: {absolutePath}");
 
                     Console.WriteLine(spsPath);
-                   
+
+
+                    string folderSearchPath = spsPath;
+
+                    // Array von Suchmustern für verschiedene Versionen
+                    string[] searchPatterns = { "*.zap15_1", "*.zap16", "*.zap17", "*.zap18", "*.zap19" };
+
+                    // Aufruf der Methode zum Durchsuchen des Verzeichnisses mit jedem Suchmuster
+                    List<string> zapFiles = new List<string>();
+                    foreach (string pattern in searchPatterns)
+                    {
+                        string[] files = SearchForZapFiles(folderSearchPath, pattern);
+                        zapFiles.AddRange(files);
+                    }
+
+                    if (zapFiles.Count > 0)
+                    {
+                        Console.WriteLine("Gefundene .zap-Dateien:");
+                        foreach (string zapFile in zapFiles)
+                        {
+                            Console.WriteLine(zapFile);
+
+                            string sourceFilePath = zapFile;                                                ///////////Noch Anpasssen////////////////////////////////////
+                            string destinationFilePath = @"C:\Users\smartin\Desktop\Projekte\Test_Copy";     ///////////Noch Anpasssen////////////////////////////////////
+
+                            Console.WriteLine(destinationFilePath);
+
+                            // Aufruf der Methode zum Kopieren der Datei
+                            //CopyFile(sourceFilePath, destinationFilePath);
+
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Keine .zap-Dateien gefunden.");
+                    }
+
+
                 }
                 else
                 {
                     Console.WriteLine($"Folder with match '{searchValue}' not found in '{endPath}'.");
+                }
+
+
+                static void CopyFile(string sourceFilePath, string destinationDirectory)
+                {
+                    try
+                    {
+                        // Überprüfen, ob die Quelldatei existiert
+                        if (File.Exists(sourceFilePath))
+                        {
+                            // Dateiname aus dem Quellpfad extrahieren
+                            string fileName = Path.GetFileName(sourceFilePath);
+
+                            // Zielpfad für die neue Datei erstellen
+                            string destinationFilePath = Path.Combine(destinationDirectory, fileName);
+
+                            // Kopiere die Datei zum Zielort
+                            File.Copy(sourceFilePath, destinationFilePath, true);
+                            Console.WriteLine("Die Datei wurde erfolgreich kopiert.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Die Quelldatei existiert nicht.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Ein Fehler ist aufgetreten: " + ex.Message);
+                    }
+                }
+
+                static string[] SearchForZapFiles(string directoryPath, string searchPattern)
+                {
+                    try
+                    {
+                        // Überprüfen, ob das Verzeichnis existiert
+                        if (Directory.Exists(directoryPath))
+                        {
+                            // Durchsuche alle Dateien im Verzeichnis mit dem angegebenen Suchmuster
+                            return Directory.GetFiles(directoryPath, searchPattern);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Das angegebene Verzeichnis existiert nicht.");
+                            return new string[0];
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Ein Fehler ist aufgetreten: " + ex.Message);
+                        return new string[0];
+                    }
                 }
 
                 static string FindFolderByMatch(string parentFolderPath, string searchTerm)
@@ -132,17 +226,17 @@ class Program
                             {                              
 
 
-                                // Überprüfe, ob der Ordner existiert, bevor er geöffnet wird
+                               /* // Überprüfe, ob der Ordner existiert, bevor er geöffnet wird
                                 if (System.IO.Directory.Exists(subfolder))
                                 {
                                     // Öffne den Ordner im Datei-Explorer
-                                    Process.Start("explorer.exe", subfolder);
+                                     Process.Start("explorer.exe", subfolder);
                                 }
                                 else
                                 {
                                     Console.WriteLine("Der angegebene Ordner existiert nicht.");
                                 }
-
+                               */
                                 string parentDirectoryPath = @"C:\Users\smartin\Desktop\Projekte";
                                 string selectedFolder = "";
 
@@ -229,6 +323,7 @@ class Program
                                     {
                                         // Öffne den Ordner im Datei-Explorer
                                         Process.Start("explorer.exe", parentDirectoryPath);
+
                                     }
                                     else
                                     {
