@@ -135,7 +135,7 @@ class Program
                             Console.WriteLine("Gefundene .zap-Dateien:");
                             foreach (string zapFile in zapFiles)
                             {
-                                string sourceFilePath = zapFile;                                                ///////////Noch Anpasssen////////////////////////////////////
+                                string sourceFilePath = zapFile;                                       
                                 string destinationFilePath = @"C:\Users\smartin\Desktop\Projekte\Test_Copy";     ///////////Noch Anpasssen////////////////////////////////////
 
                                 Console.WriteLine("Source" +sourceFilePath);
@@ -285,9 +285,11 @@ class Program
 
                                                 // Im Unterordner "SPS" einen Unterordner "ALT" erstellen
                                                 if (subFolderName == "SPS")
-                                                {
+                                                {                                                  
                                                     string altFolderPath = Path.Combine(subFolderPath, "ALT");
                                                     Directory.CreateDirectory(altFolderPath);
+                                                    string copyPath = subFolderPath + "\\";                                     //!!!!!!!!!!!!!!!!!!!!CopyPath!!!!!!!!!!!!!!!!
+                                                   // Console.WriteLine("Der angegebene Kopierpfad lautet: "+ copyPath);
                                                 }
                                             }
                                         }
@@ -314,7 +316,7 @@ class Program
                                 }
                                 
                             }
-                    }
+                    }    
                         catch (Exception ex)
                         {
                             Console.WriteLine($"Error searching for folder: {ex.Message}");
