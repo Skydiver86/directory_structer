@@ -11,12 +11,13 @@ class Program
     static void Main(string[] args)
     {
 
-        Console.WriteLine("Welcome to the Project Folder Configurator!\n");
-
+        Console.WriteLine("#     #                                           \r\n#  #  # ###### #       ####   ####  #    # ###### \r\n#  #  # #      #      #    # #    # ##  ## #      \r\n#  #  # #####  #      #      #    # # ## # #####  \r\n#  #  # #      #      #      #    # #    # #      \r\n#  #  # #      #      #    # #    # #    # #      \r\n ## ##  ###### ######  ####   ####  #    # ###### \r\n                                                  \n");
+        Console.WriteLine("    __                                  \r\n   / /   ____ ____  ____ ___  ____  ___ \r\n  / /   / __ `/ _ \\/ __ `__ \\/ __ \\/ _ \\\r\n / /___/ /_/ /  __/ / / / / / /_/ /  __/\r\n/_____/\\__,_/\\___/_/ /_/ /_/ .___/\\___/ \r\n                          /_/           \r\n   _____ ____  _____       ____                      __                __         \r\n  / ___// __ \\/ ___/      / __ \\____ _      ______  / /___  ____ _____/ /__  _____\r\n  \\__ \\/ /_/ /\\__ \\______/ / / / __ \\ | /| / / __ \\/ / __ \\/ __ `/ __  / _ \\/ ___/\r\n ___/ / ____/___/ /_____/ /_/ / /_/ / |/ |/ / / / / / /_/ / /_/ / /_/ /  __/ /    \r\n/____/_/    /____/     /_____/\\____/|__/|__/_/ /_/_/\\____/\\__,_/\\__,_/\\___/_/     \r\n                                                                                 \n\n");
         // Waiting for 2 seconds
         System.Threading.Thread.Sleep(2000);
 
         string folderPath = @"W:\SPS\PROG"; // Modify the path accordingly
+
 
         // Definieren der Liste von Zahlenbereichen
         List<Tuple<int, int>> numberRanges = new List<Tuple<int, int>>()
@@ -89,244 +90,247 @@ class Program
             Tuple.Create(9250, 9499)
         };
 
-        Console.WriteLine("Welche Projektnummer soll gesucht werden:");
-        int projectNumber = int.Parse(Console.ReadLine());
 
-        // Durchsuchen der Zahlenbereiche, um festzustellen, in welchem Bereich die Projektnummer liegt
-        foreach (var range in numberRanges)
-        {
-            if (projectNumber >= range.Item1 && projectNumber <= range.Item2)
+            Console.WriteLine("Welche Projektnummer soll gesucht werden:");
+            int projectNumber = int.Parse(Console.ReadLine());
+
+            // Durchsuchen der Zahlenbereiche, um festzustellen, in welchem Bereich die Projektnummer liegt
+            foreach (var range in numberRanges)
             {
-               // Console.WriteLine($"Project number {projectNumber} is in the range {range.Item1}-{range.Item2}");
-                string openPath = $"{range.Item1}-{range.Item2}";
-                string endPath = Path.Combine(folderPath, openPath);
-                //Console.WriteLine(endPath);
-
-                string searchValue = projectNumber.ToString() ;
-                string absolutePath = FindFolderByMatch(endPath, searchValue);
-                string spsPath = Path.Combine(absolutePath);
-
-               // Console.WriteLine(spsPath);
-               
-
-
-                if (!string.IsNullOrEmpty(absolutePath))
+                if (projectNumber >= range.Item1 && projectNumber <= range.Item2)
                 {
-                    //Console.WriteLine($"Found folder with match '{searchValue}' at: {absolutePath}");
+                   // Console.WriteLine($"Project number {projectNumber} is in the range {range.Item1}-{range.Item2}");
+                    string openPath = $"{range.Item1}-{range.Item2}";
+                    string endPath = Path.Combine(folderPath, openPath);
+                    //Console.WriteLine(endPath);
 
-                    //Console.WriteLine(spsPath);
+                    string searchValue = projectNumber.ToString() ;
+                    string absolutePath = FindFolderByMatch(endPath, searchValue);
+                    string spsPath = Path.Combine(absolutePath);
 
 
-                    string folderSearchPath = spsPath;
 
-                    // Array von Suchmustern für verschiedene Versionen
-                    string[] searchPatterns = { "*.zap15_1", "*.zap16", "*.zap17", "*.zap18", "*.zap19" };
-
-                    // Aufruf der Methode zum Durchsuchen des Verzeichnisses mit jedem Suchmuster
-                    List<string> zapFiles = new List<string>();
-                    foreach (string pattern in searchPatterns)
+                    if (!string.IsNullOrEmpty(absolutePath))
                     {
-                        string[] files = SearchForZapFiles(folderSearchPath, pattern);
-                        zapFiles.AddRange(files);
-                    }
+                        //Console.WriteLine($"Found folder with match '{searchValue}' at: {absolutePath}");
 
-                    if (zapFiles.Count > 0)
-                    {
-                        Console.WriteLine("Gefundene .zap-Dateien:");
-                        foreach (string zapFile in zapFiles)
+                        //Console.WriteLine(spsPath);
+
+
+                        string folderSearchPath = spsPath;
+
+                        // Array von Suchmustern für verschiedene Versionen
+                        string[] searchPatterns = { "*.zap15_1", "*.zap16", "*.zap17", "*.zap18", "*.zap19" };
+
+                        // Aufruf der Methode zum Durchsuchen des Verzeichnisses mit jedem Suchmuster
+                        List<string> zapFiles = new List<string>();
+                        foreach (string pattern in searchPatterns)
                         {
-                            //Console.WriteLine(zapFile);
+                            string[] files = SearchForZapFiles(folderSearchPath, pattern);
+                            zapFiles.AddRange(files);
+                        }
 
-                            string sourceFilePath = zapFile;                                                ///////////Noch Anpasssen////////////////////////////////////
-                            string destinationFilePath =@"C:\Users\smartin\Desktop\Projekte\Test_Copy";     ///////////Noch Anpasssen////////////////////////////////////
+                        if (zapFiles.Count > 0)
+                        {
+                            Console.WriteLine("Gefundene .zap-Dateien:");
+                            foreach (string zapFile in zapFiles)
+                            {
+                                string sourceFilePath = zapFile;                                                ///////////Noch Anpasssen////////////////////////////////////
+                                string destinationFilePath = @"C:\Users\smartin\Desktop\Projekte\Test_Copy";     ///////////Noch Anpasssen////////////////////////////////////
 
-                            Console.WriteLine("Source" +sourceFilePath);
-                            Console.WriteLine("destination" +destinationFilePath);
-                            
+                                Console.WriteLine("Source" +sourceFilePath);
+                                Console.WriteLine("destination" +destinationFilePath);
 
                             // Aufruf der Methode zum Kopieren der Datei
                             CopyFile(sourceFilePath, destinationFilePath);
 
                         }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Keine .zap-Dateien gefunden.");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Keine .zap-Dateien gefunden.");
+                        Console.WriteLine($"Folder with match '{searchValue}' not found in '{endPath}'.");
                     }
-                }
-                else
-                {
-                    Console.WriteLine($"Folder with match '{searchValue}' not found in '{endPath}'.");
-                }
 
-                static void CopyFile(string sourceFilePath, string destinationDirectory)
-                {
-                    try
+                    static void CopyFile(string sourceFilePath, string destinationDirectory)
                     {
-                        // Überprüfen, ob die Quelldatei existiert
-                        if (File.Exists(sourceFilePath))
+                        try
                         {
-                            // Dateiname aus dem Quellpfad extrahieren
-                            string fileName = Path.GetFileName(sourceFilePath);
+                            // Überprüfen, ob die Quelldatei existiert
+                            if (File.Exists(sourceFilePath))
+                            {
+                                // Dateiname aus dem Quellpfad extrahieren
+                                string fileName = Path.GetFileName(sourceFilePath);
 
-                            // Zielpfad für die neue Datei erstellen
-                            string destinationFilePath = Path.Combine(destinationDirectory, fileName);
+                                // Zielpfad für die neue Datei erstellen
+                                string destinationFilePath = Path.Combine(destinationDirectory, fileName);
 
-                            // Kopiere die Datei zum Zielort
-                            File.Copy(sourceFilePath, destinationFilePath, true);
-                            Console.WriteLine("Die Datei wurde erfolgreich kopiert.");
+                                // Kopiere die Datei zum Zielort
+                                File.Copy(sourceFilePath, destinationFilePath, true);
+                                Console.WriteLine("Die Datei wurde erfolgreich kopiert.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Die Quelldatei existiert nicht.");
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            Console.WriteLine("Die Quelldatei existiert nicht.");
+                            Console.WriteLine("Ein Fehler ist aufgetreten: " + ex.Message);
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Ein Fehler ist aufgetreten: " + ex.Message);
-                    }
-                }
 
-                static string[] SearchForZapFiles(string directoryPath, string searchPattern)
-                {
-                    try
+                    static string[] SearchForZapFiles(string directoryPath, string searchPattern)
                     {
-                        // Überprüfen, ob das Verzeichnis existiert
-                        if (Directory.Exists(directoryPath))
+                        try
                         {
-                            // Durchsuche alle Dateien im Verzeichnis mit dem angegebenen Suchmuster
-                            return Directory.GetFiles(directoryPath, searchPattern);
+                            // Überprüfen, ob das Verzeichnis existiert
+                            if (Directory.Exists(directoryPath))
+                            {
+                                // Durchsuche alle Dateien im Verzeichnis mit dem angegebenen Suchmuster
+                                return Directory.GetFiles(directoryPath, searchPattern);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Das angegebene Verzeichnis existiert nicht.");
+                                return new string[0];
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            Console.WriteLine("Das angegebene Verzeichnis existiert nicht.");
+                            Console.WriteLine("Ein Fehler ist aufgetreten: " + ex.Message);
                             return new string[0];
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Ein Fehler ist aufgetreten: " + ex.Message);
-                        return new string[0];
-                    }
-                }
 
-                static string FindFolderByMatch(string parentFolderPath, string searchTerm)
-                {
-                    try
+                    static string FindFolderByMatch(string parentFolderPath, string searchTerm)
                     {
-                        // Suche nach Unterordnern im übergeordneten Ordner
-                        string[] subfolders = Directory.GetDirectories(parentFolderPath);
-
-                        // Durchlaufe alle Unterordner und überprüfe, ob einer von ihnen den Suchbegriff im Namen enthält
-                        foreach (string subfolder in subfolders)
+                        try
                         {
-                            string folderName = Path.GetFileName(subfolder);
-                            if (folderName.Contains(searchTerm))
-                            {                           
-                                string parentDirectoryPath = @"C:\Users\smartin\Desktop\Projekte";
-                                string selectedFolder = "";
+                            // Suche nach Unterordnern im übergeordneten Ordner
+                            string[] subfolders = Directory.GetDirectories(parentFolderPath);
 
-                                try
-                                {
-                                    // Überprüfen, ob die Elternordner existieren
-                                    if (Directory.Exists(parentDirectoryPath))
+                            // Durchlaufe alle Unterordner und überprüfe, ob einer von ihnen den Suchbegriff im Namen enthält
+                            foreach (string subfolder in subfolders)
+                            {
+                                string folderName = Path.GetFileName(subfolder);
+                                if (folderName.Contains(searchTerm))
+                                {                           
+                                    string parentDirectoryPath = @"C:\Users\smartin\Desktop\Projekte";
+                                    string selectedFolder = "";
+
+                                    try
                                     {
-                                        // Prüfen, ob die Ordner "113" oder "114" existieren
-                                        string directory113Path = Path.Combine(parentDirectoryPath, "113");
-                                        string directory114Path = Path.Combine(parentDirectoryPath, "114");
-
-                                        if (Directory.Exists(directory113Path) || Directory.Exists(directory114Path))
+                                        // Überprüfen, ob die Elternordner existieren
+                                        if (Directory.Exists(parentDirectoryPath))
                                         {
-                                            // Fragen Sie den Benutzer nach dem zu erstellenden Ordner
-                                            Console.WriteLine("In welches Verzeichniss soll der neue Ordner erstellt werden (113 oder 114)");
-                                            string userInput = Console.ReadLine();
+                                            // Prüfen, ob die Ordner "113" oder "114" existieren
+                                            string directory113Path = Path.Combine(parentDirectoryPath, "113");
+                                            string directory114Path = Path.Combine(parentDirectoryPath, "114");
 
-                                            // Überprüfen, ob der Benutzer eine gültige Eingabe gemacht hat
-                                            if (userInput == "113" || userInput == "114")
+                                            if (Directory.Exists(directory113Path) || Directory.Exists(directory114Path))
                                             {
-                                                // Den ausgewählten Ordner festlegen
-                                                selectedFolder = userInput;
+                                                // Fragen Sie den Benutzer nach dem zu erstellenden Ordner
+                                                Console.WriteLine("In welches Verzeichniss soll der neue Ordner erstellt werden (113 oder 114)");
+                                                string userInput = Console.ReadLine();
 
+                                                // Überprüfen, ob der Benutzer eine gültige Eingabe gemacht hat
+                                                if (userInput == "113" || userInput == "114")
+                                                {
+                                                    // Den ausgewählten Ordner festlegen
+                                                    selectedFolder = userInput;
+
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("Ungültige Eingabe.");                                            
+
+                                                }
                                             }
                                             else
                                             {
-                                                Console.WriteLine("Ungültige Eingabe.");                                            
-
+                                                Console.WriteLine("Die Ordner '113' und '114' existieren nicht.");                                           
                                             }
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Die Ordner '113' und '114' existieren nicht.");                                           
+                                            Console.WriteLine("Das Verzeichnis existiert nicht: " + parentDirectoryPath);
                                         }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Das Verzeichnis existiert nicht: " + parentDirectoryPath);
-                                    }
-                                    Console.WriteLine("Name des neuen Verzeichniss:");
-                                    string projektnummer = Console.ReadLine();
-                                    Console.WriteLine("Operation wird gestartet...\n");
 
-                                    // Vollständigen Pfad des neuen Ordners erstellen
-                                    string newFolderPath = Path.Combine(parentDirectoryPath, selectedFolder, projektnummer);
 
-                                    // Überprüfen, ob der neue Ordner bereits existiert
-                                    if (!Directory.Exists(newFolderPath))
-                                    {
-                                        // Versuchen, den Ordner zu erstellen
-                                        Directory.CreateDirectory(newFolderPath);
-                                        Console.WriteLine("Verzeichniss erfolgreiich erstellt: " + newFolderPath);
+                                        Console.WriteLine("Name des neuen Verzeichniss:");
+                                        string projektnummer = Console.ReadLine();
+                                        Console.WriteLine("Operation wird gestartet...\n");
 
-                                        // Erstellen Sie die Unterordner
-                                        string[] subFolders = { "SPS", "EPLAN", "SEW", "EXCEL", "Dokumente" };
-                                        foreach (string subFolderName in subFolders)
+                                        // Vollständigen Pfad des neuen Ordners erstellen
+                                        string newFolderPath = Path.Combine(parentDirectoryPath, selectedFolder, projektnummer);
+
+                                        // Überprüfen, ob der neue Ordner bereits existiert
+                                        if (!Directory.Exists(newFolderPath))
                                         {
-                                            string subFolderPath = Path.Combine(newFolderPath, subFolderName);
-                                            Directory.CreateDirectory(subFolderPath);
+                                            // Versuchen, den Ordner zu erstellen
+                                            Directory.CreateDirectory(newFolderPath);
+                                            Console.WriteLine("Verzeichniss erfolgreiich erstellt: " + newFolderPath);
 
-                                            // Im Unterordner "SPS" einen Unterordner "ALT" erstellen
-                                            if (subFolderName == "SPS")
+                                            // Erstellen Sie die Unterordner
+                                            string[] subFolders = { "SPS", "EPLAN", "SEW", "EXCEL", "Dokumente", "Pneu + Hydr" };
+                                            foreach (string subFolderName in subFolders)
                                             {
-                                                string altFolderPath = Path.Combine(subFolderPath, "ALT");
-                                                Directory.CreateDirectory(altFolderPath);
+                                                string subFolderPath = Path.Combine(newFolderPath, subFolderName);
+                                                Directory.CreateDirectory(subFolderPath);
+
+                                                // Im Unterordner "SPS" einen Unterordner "ALT" erstellen
+                                                if (subFolderName == "SPS")
+                                                {
+                                                    string altFolderPath = Path.Combine(subFolderPath, "ALT");
+                                                    Directory.CreateDirectory(altFolderPath);
+                                                }
                                             }
                                         }
+                                        else
+                                        {
+                                            Console.WriteLine("Der Ordner '" + newFolderPath + "' existiert bereits.");
+                                        }                                
+                                        // Überprüfe, ob der Ordner existiert, bevor er geöffnet wird
+                                        if (System.IO.Directory.Exists(parentDirectoryPath))
+                                        {
+                                            // Öffne den Ordner im Datei-Explorer
+                                            Process.Start("explorer.exe", parentDirectoryPath);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Der angegebene Ordner existiert nicht.");
+                                        }
                                     }
-                                    else
+                                    catch (Exception ex)
                                     {
-                                        Console.WriteLine("Der Ordner '" + newFolderPath + "' existiert bereits.");
-                                    }                                
-                                    // Überprüfe, ob der Ordner existiert, bevor er geöffnet wird
-                                    if (System.IO.Directory.Exists(parentDirectoryPath))
-                                    {
-                                        // Öffne den Ordner im Datei-Explorer
-                                        Process.Start("explorer.exe", parentDirectoryPath);
+                                        Console.WriteLine("Fehler beim Erstellen des Ordners: " + ex.Message);
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("Der angegebene Ordner existiert nicht.");
-                                    }
-
+                                    return subfolder; // Rückgabe des gefundenen Ordnerpfads
                                 }
-                                catch (Exception ex)
-                                {
-                                    Console.WriteLine("Fehler beim Erstellen des Ordners: " + ex.Message);
-                                }
-                                return subfolder; // Rückgabe des gefundenen Ordnerpfads
+                                
                             }
+                    }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Error searching for folder: {ex.Message}");
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error searching for folder: {ex.Message}");
-                    }
-                    return null; // Rückgabe null, wenn kein Ordner mit der angegebenen Übereinstimmung gefunden wurde
+                        return null; // Rückgabe null, wenn kein Ordner mit der angegebenen Übereinstimmung gefunden wurde
+                    }               
+
                 }
             }
-        }   
+
+              
+
         Console.WriteLine("\nPress any key to continue...");
         Console.ReadKey();
     }
+
 }
 
 
